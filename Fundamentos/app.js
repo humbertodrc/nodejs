@@ -48,11 +48,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/servicios', (req, res) => {
-    res.send('mi respuesta desde la pagina servicios')
+    res.render("servicios", {tituloServicios: "Pagina de Servicios Dinamica"})
 })
 
 app.use((req, res, next) => {
-    res.status(404).sendFile(__dirname + "/public/404.html")
+    res.status(404).render("404", {
+        titulo: "404",
+        descripcion: "titulo de mi web 404"
+    })
 })
 
 app.listen(port, () => {
