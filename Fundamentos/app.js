@@ -34,16 +34,44 @@
 const express = require('express');
 const app = express();
 
-// esimportante configurar el puerto de la siguiente manera:
+// es importante configurar el puerto de la siguiente manera:
 const port = process.env.PORT || 3000;
 
-// motor de plantillas
-app.set('view engine', 'ejs'); 
-app.set('views', __dirname + '/views'); 
+// ------------variables de entrono--------------------------------->
+
+// configurando dotenv
+require('dotenv').config()
+
+
+// -----------conexion a base de datos con mongoose------------------>
+const mongoose = require('mongoose');
+
+// siempre que nos conectemos a una base de datos vamos a necesitar:
+// const user = '';
+// const password = '';
+// const dbname = ''
+
+
+//  CREAMOS LAS VARIABLES DE ENTORNO CON EL ARCHIVO .env y 'process.env.'
+
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.icwqg.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
+
+mongoose.connect(uri,
+    { useNewUrlParser: true, useUnifiedTopology: true }
+)
+    .then(() => console.log('Base de Datos Conectada'))
+    .catch(e => console.log(e))
+
+
+// -------------------------motor de plantillas------------------------>
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
 
 app.use(express.static(__dirname + "/public"));
 
-// Rutas Web API
+
+
+// --------------------------Rutas Web API------------------------------>
 app.use('/', require('./router/RutasWeb'));
 app.use('/mascotas', require('./router/Mascotas'));
 
