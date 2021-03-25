@@ -32,7 +32,20 @@
 // crear un servidor con express
 
 const express = require('express');
+
+// agregando body-parser
+const bodyParser = require('body-parser')
+
 const app = express();
+
+// -------------body-parser-------------
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+
+
 
 // es importante configurar el puerto de la siguiente manera:
 const port = process.env.PORT || 3000;
