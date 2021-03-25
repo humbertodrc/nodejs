@@ -2,11 +2,11 @@
 
     <div class="container">
         <h1>Crear</h1>
-        <form action="" method="">
+        <form action="/mascotas" method="POST">
 
             <input 
                 type="text" 
-                name="" 
+                name="nombre" 
                 id=""
                 placeholder="Agregar Nombre"
                 class="form-control my-2"
@@ -14,13 +14,18 @@
 
             <input 
             type="text" 
-            name="" 
+            name="descripcion" 
             id="" 
             placeholder="Agregar Descripcion" 
             class="form-control my-2"
             >
 
-            <button class="btn btn-success btn-block">Agregar</button>
+            <button 
+                class="btn btn-success btn-block"
+                type="submit"
+            >
+                Agregar
+            </button>
             
         </form>
     </div>
