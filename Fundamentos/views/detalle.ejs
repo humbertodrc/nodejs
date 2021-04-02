@@ -1,0 +1,46 @@
+<%- include("template/cabecera.ejs", {tituloWeb: 'Detalle de mascota' }) %>
+
+
+<!-- Viene  de Mascotas.js leer un unico docuemnto -->
+
+    <div class="container">
+        <h1>Detalle Mascota</h1>
+        <% if (error) { %>
+
+            <p>
+                <%= mensaje %>
+            </p>
+            <a href="/mascotas" class="btn btn-dark btn-block">Volver a Mascotas</a>
+
+            <% } %>
+
+                <% if (!error) { %>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <%= mascota.id %>
+                                </th>
+                                <td>
+                                    <%= mascota.nombre %>
+                                </td>
+                                <td>
+                                    <%= mascota.descripcion %>
+                                </td>
+                                <td>@mdo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <% } %>
+    </div>
+
+    <%- include("template/footer.ejs") %>

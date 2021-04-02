@@ -29,7 +29,15 @@
                             <th scope="row"> <%= mascota.id %> </th>
                             <td> <%= mascota.nombre %> </td>
                             <td> <%= mascota.descripcion %> </td>
-                            <td>@mdo</td>
+                            <td>
+                                <!-- boton para obtener la rura con el id de cada registro -->
+                                <a 
+                                href="mascotas/<%= mascota.id %>"
+                                class="btn btn-warning btn-sm"
+                                >
+                                    Editar
+                                </a>
+                            </td>
                         </tr>
                         
                     <% }) %>

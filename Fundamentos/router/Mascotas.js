@@ -54,5 +54,34 @@ router.post('/', async(req, res) => {
     }
 })
 
+// -------------------------------leer un  unico documento va a detalle.js------------------------------------
+
+router.get('/:id', async (req, res) => {
+
+    // creamos la contante ID que va a leer desde el requerimiento.
+    const id = req.params.id
+    // con esto vamos a estar leyendo la url (asi podemos buscar un unico documento)
+
+    try {
+
+        // esto va a esperar a nuestro modelo Mascota (va a buscar el primer documwnto que coincida con ese ID)
+        const mascotasDB = await Mascotas.findOne({ _id: id })
+        console.log(mascotasDB)
+
+        // para pintar todo el objeto que nos traemos con el ID en una vista correspondiente
+        res.render('detalle', {
+            mascota: mascotasDB,
+            error: false
+        })
+
+        
+    } catch (error) {
+        console.log(error)
+        res.render('detalle', {
+            error: true,
+            mensaje: 'No se encuentra el ID seleccionado'
+        })
+    }
+})
 
 module.exports = router;
