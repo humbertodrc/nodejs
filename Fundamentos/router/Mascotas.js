@@ -58,7 +58,7 @@ router.post('/', async(req, res) => {
 
 router.get('/:id', async (req, res) => {
 
-    // creamos la contante ID que va a leer desde el requerimiento.
+    // creamos la contante ID que se va a leer atraves del params.
     const id = req.params.id
     // con esto vamos a estar leyendo la url (asi podemos buscar un unico documento)
 
@@ -82,6 +82,47 @@ router.get('/:id', async (req, res) => {
             mensaje: 'No se encuentra el ID seleccionado'
         })
     }
+})
+
+
+// --------------------------------configurar la ruta que va a eliminar el documento------------------------------
+
+// delete es otro verbo de http que nos permite eliminar
+
+router.delete('/:id', async(req, res) => {
+    // creamos la contante ID que se va a leer atraves del params.
+    const id = req.params.id
+    // con esto vamos a estar leyendo la url (asi podemos buscar un unico documento)
+
+    try {
+        // aca vamos a eliminar un docuemnto que tenga un ID especifico
+        const mascotaDB = await Mascota.findByIdAndDelete({ _id: id })
+
+        // en caso de que mascotaDB exista procesamos una respuesta con if o error con else
+        if (mascotaDB) {  
+        // aca hacemos la respuesta con un json
+        res.json({
+            estado: true,
+            mensaje: 'Eliminado!'
+        })
+
+        } else {
+        res.json({
+        estado: false,
+        mensaje: 'Fallo Eliminar'
+        })
+    }
+        
+    } catch (error) {
+        console.log(error)
+    }
+
+
+
+
+
+
+
 })
 
 module.exports = router;
