@@ -85,7 +85,7 @@ router.get('/:id', async (req, res) => {
 })
 
 
-// --------------------------------configurar la ruta que va a eliminar el documento------------------------------
+// --------------------------------configurar la ruta que va a eliminar el documento va a detalle.js------------------------------
 
 // delete es otro verbo de http que nos permite eliminar
 
@@ -117,12 +117,41 @@ router.delete('/:id', async(req, res) => {
         console.log(error)
     }
 
+})
 
 
+// ------------------------------------------Editar un Documento va a detalle.js----------------------------------
+
+// put es el verbo http que se utiliza para modificar
+router.put('/:id', async(req, res) => {
+    // creamos la contante ID que se va a leer atraves del params.
+    const id = req.params.id
+    // con esto vamos a estar leyendo la url (asi podemos buscar un unico documento)
+
+    // tambien necesitamos capturar el body que son los campos que viene desde nuestros input
+    const body = req.body
+
+    try {
+        // creamos nuestra constante mascotaDB que va a esperar a nuestro modelo que se llama mascota
+        // findByIdAndUpdate es una funcion de mongoose
+        // {useFindAndModify: false} es una funcion de mongoose para que no pinte un mensaje en la consola
+        const mascotaDB = await Mascota.findByIdAndUpdate( id, body, {useFindAndModify: false})
+        console.log(mascotaDB)
+
+        res.json({
+            estado: true, 
+            mensaje: 'editado'
+        })
 
 
-
-
+    } catch (error) {
+        console.log(error)
+        res.json({
+            estado: false,
+            mensaje: 'Fallamos!'
+        })
+    }
+    
 })
 
 module.exports = router;
