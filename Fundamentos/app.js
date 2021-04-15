@@ -6,7 +6,7 @@
 //     text: "I'm a moooodule",
 //     e: "oO",
 //     T: "U "
-// }));
+// 
 
 
 // frutas.forEach(item => {
@@ -32,28 +32,25 @@
 // crear un servidor con express
 
 const express = require('express');
-
-// agregando body-parser
 const bodyParser = require('body-parser')
-
 const app = express();
 
 // -------------body-parser-------------
+
+// const bodyParser = require('body-parser')
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-
-
-// es importante configurar el puerto de la siguiente manera:
-const port = process.env.PORT || 3000;
-
 // ------------variables de entrono--------------------------------->
 
 // configurando dotenv
 require('dotenv').config()
+
+// es importante configurar el puerto de la siguiente manera:
+const port = process.env.PORT || 3000;
 
 
 // -----------conexion a base de datos con mongoose------------------>
@@ -77,15 +74,20 @@ mongoose.connect(uri,
 
 
 // -------------------------motor de plantillas------------------------>
+
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
+
+
+// --------------------------------------------------------------------->
 
 app.use(express.static(__dirname + "/public"));
 
 
-
 // --------------------------Rutas Web API------------------------------>
+
 app.use('/', require('./router/RutasWeb'));
+
 app.use('/mascotas', require('./router/Mascotas'));
 
 app.use((req, res, next) => {
@@ -97,5 +99,6 @@ app.use((req, res, next) => {
 
 app.listen(port, () => {
     console.log(`servidor a su servicio en el puerto ${port}`)
+    // console.log(__dirname);
 })
 

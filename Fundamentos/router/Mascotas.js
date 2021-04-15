@@ -1,18 +1,19 @@
 // base para construir la ruta
 const express = require('express');
-const Mascota = require('../models/mascota');
 const router = express.Router();
+const Mascota = require('../models/mascota');
+
 // base para construir la ruta
 
 // exportar el modelo de Mascotas
-const Mascotas = require('../models/mascota')
+// const Mascotas = require('../models/mascota')
 
 router.get('/', async(req, res) => {
 
     try {
         
         // con esta constante mongoose nos va a traer toda nuestra coleccion
-        const arrayMascotasDB = await Mascotas.find()
+        const arrayMascotasDB = await Mascota.find()
         console.log(arrayMascotasDB)
 
         res.render("mascotas", {
@@ -65,7 +66,7 @@ router.get('/:id', async (req, res) => {
     try {
 
         // esto va a esperar a nuestro modelo Mascota (va a buscar el primer documwnto que coincida con ese ID)
-        const mascotasDB = await Mascotas.findOne({ _id: id })
+        const mascotasDB = await Mascota.findOne({ _id: id })
         console.log(mascotasDB)
 
         // para pintar todo el objeto que nos traemos con el ID en una vista correspondiente
